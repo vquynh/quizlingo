@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.examplede.oncampus.patterns.languagegame.model</OriginalElement>
+  <nodes>
+    <node x="492.0" y="-1.0">com.examplede.oncampus.patterns.languagegame.model.User</node>
+    <node x="228.5" y="59.0">com.examplede.oncampus.patterns.languagegame.model.Game</node>
+    <node x="224.0" y="631.0">com.examplede.oncampus.patterns.languagegame.model.Question</node>
+    <node x="236.5" y="899.0">com.examplede.oncampus.patterns.languagegame.model.Option</node>
+    <node x="201.0" y="415.0">com.examplede.oncampus.patterns.languagegame.model.Round</node>
+    <node x="504.0" y="415.0">com.examplede.oncampus.patterns.languagegame.model.Level</node>
+    <node x="-5.0" y="415.0">com.examplede.oncampus.patterns.languagegame.model.Category</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Question" target="com.examplede.oncampus.patterns.languagegame.model.Option" relationship="TO_ONE">
+      <point x="-10.0" y="-0.0" />
+      <point x="-10.0" y="-41.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Question" target="com.examplede.oncampus.patterns.languagegame.model.Level" relationship="TO_ONE">
+      <point x="96.0" y="-5.0" />
+      <point x="575.0" y="715.0" />
+      <point x="-5.0" y="-0.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Game" target="com.examplede.oncampus.patterns.languagegame.model.Round" relationship="DEPENDENCY">
+      <point x="5.0" y="-0.0" />
+      <point x="5.0" y="-65.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Round" target="com.examplede.oncampus.patterns.languagegame.model.Category" relationship="TO_ONE">
+      <point x="-119.0" y="-5.0" />
+      <point x="65.0" y="-5.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Game" target="com.examplede.oncampus.patterns.languagegame.model.User" relationship="DEPENDENCY">
+      <point x="91.5" y="-0.0" />
+      <point x="-88.0" y="-0.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.User" target="com.examplede.oncampus.patterns.languagegame.model.Game" relationship="DEPENDENCY">
+      <point x="0.0" y="-10.0" />
+      <point x="91.5" y="-10.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.User" target="com.examplede.oncampus.patterns.languagegame.model.Level" relationship="DEPENDENCY">
+      <point x="5.0" y="-0.0" />
+      <point x="5.0" y="-65.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Round" target="com.examplede.oncampus.patterns.languagegame.model.Level" relationship="DEPENDENCY">
+      <point x="119.0" y="-5.0" />
+      <point x="0.0" y="-5.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Question" target="com.examplede.oncampus.patterns.languagegame.model.Category" relationship="TO_ONE">
+      <point x="-96.0" y="-5.0" />
+      <point x="65.0" y="715.0" />
+      <point x="5.0" y="65.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Question" target="com.examplede.oncampus.patterns.languagegame.model.Category" relationship="DEPENDENCY">
+      <point x="0.0" y="5.0" />
+      <point x="55.0" y="725.0" />
+      <point x="-5.0" y="-0.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Question" target="com.examplede.oncampus.patterns.languagegame.model.Option" relationship="TO_MANY">
+      <point x="0.0" y="89.0" />
+      <point x="0.0" y="-41.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.User" target="com.examplede.oncampus.patterns.languagegame.model.Level" relationship="TO_ONE">
+      <point x="-5.0" y="161.0" />
+      <point x="-5.0" y="-65.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Round" target="com.examplede.oncampus.patterns.languagegame.model.Category" relationship="DEPENDENCY">
+      <point x="0.0" y="5.0" />
+      <point x="65.0" y="5.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Game" target="com.examplede.oncampus.patterns.languagegame.model.Round" relationship="TO_MANY">
+      <point x="-5.0" y="101.0" />
+      <point x="-5.0" y="-65.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Round" target="com.examplede.oncampus.patterns.languagegame.model.Question" relationship="TO_MANY">
+      <point x="-5.0" y="65.0" />
+      <point x="-5.0" y="-89.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Round" target="com.examplede.oncampus.patterns.languagegame.model.Level" relationship="TO_ONE">
+      <point x="119.0" y="5.0" />
+      <point x="-76.0" y="5.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Question" target="com.examplede.oncampus.patterns.languagegame.model.Option" relationship="DEPENDENCY">
+      <point x="10.0" y="-0.0" />
+      <point x="10.0" y="-41.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Round" target="com.examplede.oncampus.patterns.languagegame.model.Question" relationship="DEPENDENCY">
+      <point x="5.0" y="-0.0" />
+      <point x="5.0" y="-89.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Game" target="com.examplede.oncampus.patterns.languagegame.model.User" relationship="TO_ONE">
+      <point x="91.5" y="10.0" />
+      <point x="0.0" y="10.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Game" target="com.examplede.oncampus.patterns.languagegame.model.User" relationship="TO_MANY">
+      <point x="91.5" y="20.0" />
+      <point x="0.0" y="20.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.User" target="com.examplede.oncampus.patterns.languagegame.model.Game" relationship="TO_MANY">
+      <point x="0.0" y="-20.0" />
+      <point x="91.5" y="-20.0" />
+    </edge>
+    <edge source="com.examplede.oncampus.patterns.languagegame.model.Question" target="com.examplede.oncampus.patterns.languagegame.model.Level" relationship="DEPENDENCY">
+      <point x="96.0" y="5.0" />
+      <point x="585.0" y="725.0" />
+      <point x="5.0" y="65.0" />
+    </edge>
+  </edges>
+  <settings layout="Orthogonal Groups" zoom="0.6676646706586826" showDependencies="true" x="331.4999999999999" y="531.1883408071749" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
