@@ -1,4 +1,4 @@
-package com.examplede.oncampus.patterns.languagegame;
+package de.oncampus.patterns.languagegame;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

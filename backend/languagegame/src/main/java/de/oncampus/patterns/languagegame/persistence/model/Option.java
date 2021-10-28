@@ -1,4 +1,4 @@
-package com.examplede.oncampus.patterns.languagegame.model;
+package de.oncampus.patterns.languagegame.persistence.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

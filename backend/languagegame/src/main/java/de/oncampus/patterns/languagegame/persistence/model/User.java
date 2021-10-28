@@ -1,26 +1,32 @@
-package com.examplede.oncampus.patterns.languagegame.model;
+package de.oncampus.patterns.languagegame.persistence.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 public class User {
 
+    @Id
+    @Column(unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String userName;
     private String password;
+    private String profilePicUrl;
     private String country;
     private String firstName;
     private String lastName;
     private Level level;
 
-    @OneToMany
-    private List<Game> games;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_games", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"))
+    private Collection<Game> games;
+
     private int totalScore;
     private int highScore;
+    private int averageScore;
     private Date createdAt;
     private Date updatedAt;
 
@@ -28,7 +34,6 @@ public class User {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }
@@ -81,7 +86,7 @@ public class User {
         this.level = level;
     }
 
-    public List<Game> getGames() {
+    public Collection<Game> getGames() {
         return List.copyOf(games);
     }
 
@@ -119,5 +124,21 @@ public class User {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
+    }
+
+    public int getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(int averageScore) {
+        this.averageScore = averageScore;
     }
 }

@@ -1,4 +1,4 @@
-package com.examplede.oncampus.patterns.languagegame.model;
+package de.oncampus.patterns.languagegame.persistence.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 public class Question {
+    @Id
     private Long id;
 
     private String questionText;
@@ -26,7 +27,6 @@ public class Question {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }

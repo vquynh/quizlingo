@@ -1,16 +1,18 @@
-package com.examplede.oncampus.patterns.languagegame.model;
+package de.oncampus.patterns.languagegame.persistence.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Round {
+    @Id
     private Long id;
 
-    @OneToMany
+    @ManyToOne
+    private Game game;
+
+    @OneToMany(targetEntity=Question.class, fetch= FetchType.EAGER)
     private List<Question> questionList;
 
     private Category category;
@@ -21,7 +23,6 @@ public class Round {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }

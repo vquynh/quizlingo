@@ -1,37 +1,32 @@
-package com.examplede.oncampus.patterns.languagegame.model;
+package de.oncampus.patterns.languagegame.persistence.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Game {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date startedAt;
 
     private Date endedAt;
 
-    @OneToMany
+    @OneToMany(targetEntity=Round.class, mappedBy="game", fetch=FetchType.EAGER)
     private List<Round> rounds;
 
-    @OneToMany
-    private List<User> players;
+   @ManyToMany(mappedBy = "games")
+    private Collection<User> users;
 
     private boolean isEnded;
-
-    @OneToOne
-    private User wonBy;
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }
@@ -60,14 +55,6 @@ public class Game {
         this.rounds = rounds;
     }
 
-    public List<User> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<User> players) {
-        this.players = players;
-    }
-
     public boolean isEnded() {
         return isEnded;
     }
@@ -76,11 +63,11 @@ public class Game {
         isEnded = ended;
     }
 
-    public User getWonBy() {
-        return wonBy;
+    public Collection<User> getUsers() {
+        return users;
     }
 
-    public void setWonBy(User wonBy) {
-        this.wonBy = wonBy;
+    public void setUsers(Collection<User> users) {
+        this.users = users;
     }
 }
