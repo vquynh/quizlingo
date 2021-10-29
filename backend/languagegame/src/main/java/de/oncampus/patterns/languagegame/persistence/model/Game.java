@@ -15,11 +15,14 @@ public class Game {
 
     private Date endedAt;
 
-    @OneToMany(targetEntity=Round.class, mappedBy="game", fetch=FetchType.EAGER)
+    @OneToMany
     private List<Round> rounds;
 
    @ManyToMany(mappedBy = "games")
     private Collection<User> users;
+
+   @OneToOne
+   private User wonBy;
 
     private boolean isEnded;
 
@@ -69,5 +72,13 @@ public class Game {
 
     public void setUsers(Collection<User> users) {
         this.users = users;
+    }
+
+    public User getWonBy() {
+        return wonBy;
+    }
+
+    public void setWonBy(User wonBy) {
+        this.wonBy = wonBy;
     }
 }

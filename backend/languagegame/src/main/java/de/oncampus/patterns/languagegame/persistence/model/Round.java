@@ -9,9 +9,6 @@ public class Round {
     @Id
     private Long id;
 
-    @ManyToOne
-    private Game game;
-
     @OneToMany(targetEntity=Question.class, fetch= FetchType.EAGER)
     private List<Question> questionList;
 
