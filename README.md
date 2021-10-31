@@ -1,20 +1,20 @@
-# Patterns and Frameworks (TH Lübeck W21)  - Group J
+# Patterns and Frameworks (TH Lübeck W21)  - Gruppe J
 
-## Project description
+## Projektbeschreibung
 A language learning multiplayer game
 
-## Authors
+## Autoren
 - Jörn Kogerup	
 - Jörn Mathis Korfmann
 - Thi Viet Quynh Nguyen
 
-## Architecture diagram
+## Architekturdiagramm
 
 ![alt text](diagram/architecture%20diagram.png "architecture diagram")
 
-## Class diagram
+## Klassendiagramm
 ![alt text](diagram/class%20diagram.png "class diagram")
-*Class diagram of data entities*
+*Klassendiagramm der Entitäten*
 
 ![alt text](diagram/Class%20diagram%20with%20controllers%20and%20repositories.png "class diagram extended")
-*Class diagram with controllers and repositories*
+*Provisorisches Klassendiagramm des Java Web Servers mit Controllern, Data Entitäten und Repositories*
