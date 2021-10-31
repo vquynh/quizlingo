@@ -12,8 +12,6 @@ public class Round {
     @OneToMany(targetEntity=Question.class, fetch= FetchType.EAGER)
     private List<Question> questionList;
 
-    private Category category;
-
     private Level level;
 
     public void setId(Long id) {
@@ -30,14 +28,6 @@ public class Round {
 
     public void setQuestionList(List<Question> questionList) {
         this.questionList = questionList;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public Level getLevel() {

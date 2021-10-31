@@ -8,10 +8,17 @@ import java.util.List;
 
 @Entity
 public class Question {
+
     @Id
     private Long id;
 
+    @OneToOne
+    private Topic topic;
+
     private String questionText;
+
+    @OneToMany
+    private List<Term> terms;
 
     @OneToMany
     private List<Option> options;
@@ -20,8 +27,6 @@ public class Question {
     private Option answer;
 
     private Level level;
-
-    private Category category;
 
     public void setId(Long id) {
         this.id = id;
@@ -63,11 +68,4 @@ public class Question {
         this.level = level;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 }
