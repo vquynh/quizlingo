@@ -9,6 +9,11 @@ import javax.validation.constraints.Size;
 
 @PasswordMatches
 public class UserDto {
+
+    @NotNull
+    @Size(min = 1, message = "{Size.userDto.username}")
+    private String username;
+
     @NotNull
     @Size(min = 1, message = "{Size.userDto.firstName}")
     private String firstName;
@@ -79,4 +84,11 @@ public class UserDto {
         this.matchingPassword = matchingPassword;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

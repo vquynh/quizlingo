@@ -4,6 +4,7 @@ package de.oncampus.patterns.languagegame.persistence.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -18,8 +19,10 @@ public class Term {
 
     private String translation;
 
+    @OneToMany
     private List<Example> exampleList;
 
+    @OneToMany
     private List<Keyword> keywordList;
 
     private String conjugation;

@@ -26,9 +26,9 @@ public class RegistrationRestController {
 
     // Registration
     @PostMapping("/user/registration")
-    public GenericResponse registerUserAccount(@Valid final UserDto accountDto, final HttpServletRequest request) {
-        LOGGER.debug("Registering user account with information: {}", accountDto);
-        final User registered = userService.registerNewUserAccount(accountDto);
+    public GenericResponse registerUserAccount(@Valid final UserDto userDto, final HttpServletRequest request) {
+        LOGGER.debug("Registering user account with information: {}", userDto);
+        final User registered = userService.registerNewUserAccount(userDto);
         return new GenericResponse("success");
     }
 
