@@ -1,16 +1,14 @@
 package de.oncampus.quizlingo.web.controller;
 
-import de.oncampus.quizlingo.persistence.model.Player;
+import de.oncampus.quizlingo.exception.UserAlreadyExistException;
 import de.oncampus.quizlingo.services.UserService;
 import de.oncampus.quizlingo.web.dto.UserDto;
 import de.oncampus.quizlingo.web.util.GenericResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -26,10 +24,12 @@ public class RegistrationRestController {
 
     // Registration
     @PostMapping("/user/registration")
-    public GenericResponse registerUserAccount(@Valid final UserDto userDto, final HttpServletRequest request) {
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    public UserDto registerUserAccount(@RequestBody @Valid final UserDto userDto) throws UserAlreadyExistException {
         LOGGER.debug("Registering user account with information: {}", userDto);
-        final Player registered = userService.registerNewUserAccount(userDto);
-        return new GenericResponse("success");
+        //List<GrantedAuthority> grantedAuthorityList = List.of(new SimpleGrantedAuthority("USER"));
+        return userService.registerNewUserAccount(userDto);
     }
 
 }

@@ -12,8 +12,11 @@ public class Player {
     @Column(unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(unique = true, nullable = false)
     private String userName;
-    private String password;
+
+    private String passwordHash;
     private String profilePicUrl;
     private String country;
     private String firstName;
@@ -46,12 +49,12 @@ public class Player {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String password) {
+        this.passwordHash = password;
     }
 
     public String getCountry() {
