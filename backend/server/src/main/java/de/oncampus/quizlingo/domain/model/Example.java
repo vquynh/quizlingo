@@ -1,16 +1,16 @@
-package de.oncampus.quizlingo.persistence.model;
+package de.oncampus.quizlingo.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Topic {
+public class Example {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String name;
+    private String text;
 
     public Long getId() {
         return id;
@@ -18,13 +18,5 @@ public class Topic {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

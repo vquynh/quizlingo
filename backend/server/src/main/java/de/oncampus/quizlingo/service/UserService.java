@@ -1,7 +1,7 @@
-package de.oncampus.quizlingo.services;
+package de.oncampus.quizlingo.service;
 
 import de.oncampus.quizlingo.exception.UserAlreadyExistException;
-import de.oncampus.quizlingo.web.dto.UserDto;
+import de.oncampus.quizlingo.domain.dto.UserDto;
 
 public interface UserService {
 

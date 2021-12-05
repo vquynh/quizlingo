@@ -1,4 +1,4 @@
-package de.oncampus.quizlingo.web.dto;
+package de.oncampus.quizlingo.domain.dto;
 
 import de.oncampus.quizlingo.validation.PasswordMatches;
 import de.oncampus.quizlingo.validation.ValidEmail;
@@ -15,12 +15,8 @@ public class UserDto {
     private String username;
 
     @NotNull
-    @Size(min = 1, message = "{Size.userDto.firstName}")
-    private String firstName;
-
-    @NotNull
-    @Size(min = 1, message = "{Size.userDto.lastName}")
-    private String lastName;
+    @Size(min = 1, message = "{Size.userDto.name}")
+    private String name;
 
     @ValidPassword
     private String password;
@@ -29,43 +25,35 @@ public class UserDto {
     @Size(min = 1)
     private String matchingPassword;
 
-    @ValidEmail
-    @NotNull
-    @Size(min = 1, message = "{Size.userDto.email}")
-    private String email;
+//    @ValidEmail
+//    @NotNull
+//    @Size(min = 1, message = "{Size.userDto.email}")
+//    private String email;
 
-    public String getEmail() {
-        return email;
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(final String email) {
+//        this.email = email;
+//    }
+//
+//    private Integer role;
+//
+//    public Integer getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(final Integer role) {
+//        this.role = role;
+//    }
+
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(final String email) {
-        this.email = email;
-    }
-
-    private Integer role;
-
-    public Integer getRole() {
-        return role;
-    }
-
-    public void setRole(final Integer role) {
-        this.role = role;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(final String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(final String lastName) {
-        this.lastName = lastName;
+    public void setName(final String name) {
+        this.name = name;
     }
 
     public String getPassword() {

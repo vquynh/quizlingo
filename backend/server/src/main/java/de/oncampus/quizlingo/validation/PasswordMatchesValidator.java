@@ -1,6 +1,6 @@
 package de.oncampus.quizlingo.validation;
 
-import de.oncampus.quizlingo.web.dto.UserDto;
+import de.oncampus.quizlingo.domain.dto.UserDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

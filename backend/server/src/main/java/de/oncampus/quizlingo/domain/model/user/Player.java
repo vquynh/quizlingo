@@ -1,4 +1,7 @@
-package de.oncampus.quizlingo.persistence.model;
+package de.oncampus.quizlingo.domain.model.user;
+
+import de.oncampus.quizlingo.domain.model.Game;
+import de.oncampus.quizlingo.domain.model.Level;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -13,14 +16,11 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String userName;
+    @OneToOne
+    private Account account;
 
-    private String passwordHash;
     private String profilePicUrl;
     private String country;
-    private String firstName;
-    private String lastName;
     private Level level;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -32,53 +32,12 @@ public class Player {
     private int averageScore;
     private Date createdAt;
     private Date updatedAt;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String password) {
-        this.passwordHash = password;
-    }
-
     public String getCountry() {
         return country;
     }
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public Level getLevel() {
@@ -143,5 +102,21 @@ public class Player {
 
     public void setAverageScore(int averageScore) {
         this.averageScore = averageScore;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

@@ -1,4 +1,4 @@
-package de.oncampus.quizlingo.persistence.model;
+package de.oncampus.quizlingo.domain.model;
 
 public enum Level {
     BEGINNER,
