@@ -14,9 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService{
     private final AccountRepository repository;
 
-    @Value("${admin.username}")
-    private String adminUsername;
-
     public UserServiceImpl(AccountRepository repository) {
         this.repository = repository;
     }
@@ -27,13 +24,9 @@ public class UserServiceImpl implements UserService{
             throw new UserAlreadyExistException("There is an account with that username: "
                     + userDto.getUsername());
         }
-
         Account account = new Account();
         account.setUserName(userDto.getUsername());
         account.setPasswordHash(new BCryptPasswordEncoder().encode(userDto.getPassword()));
-        if(userDto.getUsername().equals(adminUsername)){
-            account.setAdmin(true);
-        }
         repository.save(account);
         return userDto;
     }

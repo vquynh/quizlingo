@@ -11,9 +11,9 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    env:
+      SPANISH_GAME_DATASOURCE_PASSWORD: ${{ secrets.SPANISH_GAME_DATASOURCE_PASSWORD }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
