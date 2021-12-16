@@ -5,7 +5,7 @@ name: Maven Package
 
 on:
   release:
-    types: [created]
+    types: [created] # This action will be triggered when a release is created
 
 jobs:
   build:
