@@ -1,33 +1,33 @@
 name: Build and deploy to Heroku
 
 on:
-  push:
+  push: 
     branches:
-      - main
+      - main # build will be triggered on git push to this branch
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  build-and-test: # first job build and run test using mvn package
+    runs-on: ubuntu-latest # platform to run the actions on
     env:
-      SPANISH_GAME_DATASOURCE_PASSWORD: ${{ secrets.SPANISH_GAME_DATASOURCE_PASSWORD }}
+      QUIZLINGO_DATASOURCE_PASSWORD: ${{ secrets.QUIZLINGO_DATASOURCE_PASSWORD }} # add environment variables from github secrets
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2 # This is an action from the repository "actions/checkout" by github
       - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
+        uses: actions/setup-java@v2 # This is an action from the repository "actions/setup-java" by github
+        with:                      # run the action with parameters
+          java-version: '11' 
           distribution: 'adopt'
           cache: maven
       - name: Build with Maven
-        run: mvn -B package --file backend/server/pom.xml
+        run: mvn -B package --file backend/server/pom.xml 
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "quizlingo-backend" #Must be unique in Heroku
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action to deploy to heroku by akhileshns
+        with:                                   # Run action with parameters
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}} # Get HEROKU_API_KEY from repository secrets
+          heroku_app_name: "quizlingo-backend" # Must be unique in Heroku
           heroku_email: "ng.viet.quynh@gmail.com"
-          appdir: "backend/server" # <- This will point to the
-          healthcheck: "https://quizlingo-backend.herokuapp.com/"
+          appdir: "backend/server" # <- This will point to the path of the heroku deployable
+          healthcheck: "https://quizlingo-backend.herokuapp.com/" # This url will be opened after deployment to check if app is running
