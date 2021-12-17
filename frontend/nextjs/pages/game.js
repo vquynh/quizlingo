@@ -15,7 +15,7 @@ import TimerIcon from "@mui/icons-material/Timer";
 import Link from "../src/Link";
 import Copyright from "../src/Copyright";
 
-const data = [{ questionText: "Hallo" }];
+let selectedBox = null;
 
 export async function getStaticProps(context) {
   const res = await fetch(`https://quizlingo-backend.herokuapp.com/questions`);
@@ -32,6 +32,18 @@ export async function getStaticProps(context) {
   return {
     props: { data }, // will be passed to the page component as props
   };
+}
+
+function changeSelectedBox(box) {
+
+  if (selectedBox == null) {
+    selectedBox= box;
+    document.getElementById(box).classList.add("selectedBox");
+  } else {
+    document.getElementById(selectedBox).classList.remove("selectedBox");
+    document.getElementById(box).classList.add("selectedBox");
+    selectedBox= box;
+  }
 }
 
 export default function Game({ data }) {
@@ -89,13 +101,14 @@ export default function Game({ data }) {
       >
         {data[0].questionText}
       </Box>
+
       <Box typography="h3" sx={{ display: "flex", justifyContent: "center" }}>
         Antworten
       </Box>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <Box
+            <Box id="box1" onClick={() => changeSelectedBox("box1")}
               sx={{
                 height: 100,
                 backgroundColor: "gray",
@@ -105,7 +118,7 @@ export default function Game({ data }) {
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <Box
+            <Box id="box2" onClick={() => changeSelectedBox("box2")}
               sx={{
                 height: 100,
                 backgroundColor: "green",
@@ -115,7 +128,7 @@ export default function Game({ data }) {
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <Box
+            <Box id="box3" onClick={() => changeSelectedBox("box3")}
               sx={{
                 height: 100,
                 backgroundColor: "gray",
@@ -125,7 +138,7 @@ export default function Game({ data }) {
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <Box
+            <Box id="box4" onClick={() => changeSelectedBox("box4")}
               sx={{
                 height: 100,
                 backgroundColor: "gray",
