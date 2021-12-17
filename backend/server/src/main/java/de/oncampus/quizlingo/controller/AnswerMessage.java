@@ -3,9 +3,10 @@ package de.oncampus.quizlingo.controller;
 
 import java.util.Date;
 
-public class GameMessage {
+public class AnswerMessage {
     String user;
-    Date time = new Date();
     String text;
     String sessionId;
+    int selectedAnswer;
+    long questionId;
 }

@@ -7,4 +7,5 @@ import java.util.List;
 public interface QuestionService {
 
     List<QuestionDTO> getAllQuestions();
+    QuestionDTO getQuestion(long id);
 }

@@ -32,9 +32,4 @@ public class TopicRestController {
     public TopicDTO create(@RequestBody TopicDTO topicDTO) throws TopicServiceImpl.TopicAlreadyExistException {
         return topicService.createTopic(topicDTO);
     }
-
-    @GetMapping("/")
-    public String home(){
-        return "Spanish learning game server. Go to endpoint /swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config to see api documentation";
-    }
 }

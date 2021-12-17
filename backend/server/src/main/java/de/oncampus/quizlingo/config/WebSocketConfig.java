@@ -18,6 +18,8 @@ public class WebSocketConfig  implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/answer");
+        registry.addEndpoint("/answer").withSockJS();
         registry.addEndpoint("/quizlingo-websocket").withSockJS();
     }
 

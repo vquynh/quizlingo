@@ -19,4 +19,12 @@ public class QuestionServiceImpl implements QuestionService {
                 new QuestionDTO("Question 4", topicDTO, new ArrayList<>(), List.of("A - Option 1", "B - Option 2", "C - Option 3", "D - Option 4"), 3),
                 new QuestionDTO("Question 5", topicDTO, new ArrayList<>(), List.of("A - Option 1", "B - Option 2", "C - Option 3", "D - Option 4"), 0));
     }
+
+    @Override
+    public QuestionDTO getQuestion(long id) {
+        TopicDTO topicDTO = new TopicDTO("Test topic");
+        return new QuestionDTO("Question 1", topicDTO, new ArrayList<>(), List.of("A - Option 1", "B - Option 2", "C - Option 3", "D - Option 4"), 0);
+    }
+
+
 }
