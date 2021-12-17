@@ -30,9 +30,7 @@ public class TopicServiceImpl implements TopicService {
     }
 
     private TopicDTO convertToTopicDTO(Topic topic) {
-        TopicDTO topicDTO = new TopicDTO();
-        topicDTO.setName(topic.getName());
-        return topicDTO;
+        return new TopicDTO(topic.getName());
     }
 
     private Topic convertToTopic(TopicDTO topicDTO) {
