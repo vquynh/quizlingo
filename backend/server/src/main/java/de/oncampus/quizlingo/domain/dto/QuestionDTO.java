@@ -4,7 +4,7 @@ import java.util.List;
 
 public class QuestionDTO {
 
-    public QuestionDTO(String name, TopicDTO topic, List<String> terms, List<String> options, String correctAnswer) {
+    public QuestionDTO(String name, TopicDTO topic, List<String> terms, List<String> options, int correctAnswer) {
         this.questionText = name;
         this.topic = topic;
         this.terms = terms;
@@ -16,7 +16,7 @@ public class QuestionDTO {
     private TopicDTO topic;
     private List<String> terms;
     private List<String> options;
-    private String correctAnswer;
+    private int correctAnswer;
 
     public String getQuestionText() {
         return questionText;
@@ -50,11 +50,11 @@ public class QuestionDTO {
         this.options = options;
     }
 
-    public String getCorrectAnswer() {
+    public int getCorrectAnswer() {
         return correctAnswer;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
+    public void setCorrectAnswer(int correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 }
