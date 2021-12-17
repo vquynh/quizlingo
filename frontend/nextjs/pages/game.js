@@ -15,7 +15,26 @@ import TimerIcon from "@mui/icons-material/Timer";
 import Link from "../src/Link";
 import Copyright from "../src/Copyright";
 
-export default function Game() {
+const data = [{ questionText: "Hallo" }];
+
+export async function getStaticProps(context) {
+  const res = await fetch(`https://quizlingo-backend.herokuapp.com/questions`);
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  console.log(data);
+
+  return {
+    props: { data }, // will be passed to the page component as props
+  };
+}
+
+export default function Game({ data }) {
   return (
     <Container maxWidth="sm">
       <Box sx={{ flexGrow: 1 }}>
@@ -33,7 +52,6 @@ export default function Game() {
           </Toolbar>
         </AppBar>
       </Box>
-
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box sx={{ display: "flex" }}>
           <Avatar
@@ -52,7 +70,6 @@ export default function Game() {
           />
         </Box>
       </Box>
-
       <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
@@ -70,13 +87,11 @@ export default function Game() {
           backgroundColor: "gray",
         }}
       >
-        Übersetze den Ausdruck „ins Krankenhaus fahren“ ins Spansiche.
+        {data[0].questionText}
       </Box>
-
       <Box typography="h3" sx={{ display: "flex", justifyContent: "center" }}>
         Antworten
       </Box>
-
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -86,7 +101,7 @@ export default function Game() {
                 backgroundColor: "gray",
               }}
             >
-              A: Ir al hospital
+              {data[0].options[0]}
             </Box>
           </Grid>
           <Grid item xs={6}>
@@ -96,7 +111,7 @@ export default function Game() {
                 backgroundColor: "green",
               }}
             >
-              B: Conducir al hospital
+              {data[0].options[1]}
             </Box>
           </Grid>
           <Grid item xs={6}>
@@ -106,7 +121,7 @@ export default function Game() {
                 backgroundColor: "gray",
               }}
             >
-              C: Ser llevado al hospital
+              {data[0].options[2]}
             </Box>
           </Grid>
           <Grid item xs={6}>
@@ -116,7 +131,7 @@ export default function Game() {
                 backgroundColor: "gray",
               }}
             >
-              D: Ir a la hospital
+              {data[0].options[3]}
             </Box>
           </Grid>
         </Grid>
