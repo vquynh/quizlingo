@@ -7,13 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Grid from "@mui/material/Grid";
-
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ProTip from "../src/ProTip";
 import TimerIcon from "@mui/icons-material/Timer";
-import Link from "../src/Link";
-import Copyright from "../src/Copyright";
 
 let selectedBox = null;
 
@@ -35,14 +29,13 @@ export async function getStaticProps(context) {
 }
 
 function changeSelectedBox(box) {
-
   if (selectedBox == null) {
-    selectedBox= box;
+    selectedBox = box;
     document.getElementById(box).classList.add("selectedBox");
   } else {
     document.getElementById(selectedBox).classList.remove("selectedBox");
     document.getElementById(box).classList.add("selectedBox");
-    selectedBox= box;
+    selectedBox = box;
   }
 }
 
@@ -50,104 +43,246 @@ export default function Game({ data }) {
   return (
     <Container maxWidth="sm">
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Frage 1/1
-            </Typography>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              1 vs. 1
+              Test de vocabulario
             </Typography>
             <Button color="inherit" href="/">
-              Beenden
+              Salir
             </Button>
           </Toolbar>
         </AppBar>
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Box sx={{ display: "flex" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          mt: 6,
+          py: 3,
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           <Avatar
             alt="Remy Sharp"
             src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+            sx={{ width: 80, height: 80, mr: 2, boxShadow: 2 }}
           />
 
           <Box typography="h2">0</Box>
         </Box>
 
-        <Box sx={{ display: "flex" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TimerIcon sx={{ fontSize: "2rem", mr: 1 }} />
+          <Box typography="h2">00:07</Box>
+        </Box>
+
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box typography="h2">0</Box>
           <Avatar
             alt="Remy Sharp"
             src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80"
+            sx={{ width: 80, height: 80, ml: 2, boxShadow: 2 }}
           />
         </Box>
-      </Box>
-      <Box
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
-        <TimerIcon />
-        <Box typography="body1">00:10</Box>
-      </Box>
-
-      <Box typography="h3" sx={{ display: "flex", justifyContent: "center" }}>
-        Frage 1
       </Box>
 
       <Box
         sx={{
-          height: 150,
-          backgroundColor: "gray",
+          display: "flex",
+          backgroundColor: "spain_flag_yellow_light.main",
+          borderRadius: 3,
+          boxShadow: 2,
         }}
       >
-        {data[0].questionText}
+        <Box
+          typography="h1"
+          sx={{ ml: 2, mt: 0, color: "#B89614", fontSize: 48 }}
+        >
+          ?
+        </Box>
+        <Box
+          sx={{
+            flexGrow: 1,
+            height: 150,
+            p: 2,
+            mb: 2,
+          }}
+        >
+          <Typography
+            variant="h3"
+            guterBottom
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            Pregunta 1 de 12
+          </Typography>
+          {data[0].questionText}
+        </Box>
       </Box>
 
-      <Box typography="h3" sx={{ display: "flex", justifyContent: "center" }}>
-        Antworten
-      </Box>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, my: 2 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <Box id="box1" onClick={() => changeSelectedBox("box1")}
+            <Box
+              id="box1"
+              onClick={() => changeSelectedBox("box1")}
               sx={{
+                display: "flex",
                 height: 100,
-                backgroundColor: "gray",
+                boxShadow: 2,
+                p: 2,
+                backgroundColor: "spain_flag_yellow_light.main",
+                borderRadius: 4,
+                "&:hover": {
+                  backgroundColor: "secondary.main",
+                  opacity: [0.9, 0.8, 0.7],
+                },
               }}
             >
-              {data[0].options[0]}
+              <Box
+                typography="h1"
+                sx={{
+                  display: "flex",
+                  color: "#B89614",
+                  fontSize: 48,
+                  mr: 2,
+                  alignItems: "center",
+                }}
+              >
+                A
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                {data[0].options[0]}
+              </Box>
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <Box id="box2" onClick={() => changeSelectedBox("box2")}
+            <Box
+              id="box2"
+              onClick={() => changeSelectedBox("box2")}
               sx={{
+                display: "flex",
                 height: 100,
-                backgroundColor: "green",
+                boxShadow: 2,
+                p: 2,
+                backgroundColor: "spain_flag_yellow_light.main",
+                borderRadius: 4,
+                "&:hover": {
+                  backgroundColor: "secondary.main",
+                  opacity: [0.9, 0.8, 0.7],
+                },
               }}
             >
-              {data[0].options[1]}
+              <Box
+                typography="h1"
+                sx={{
+                  display: "flex",
+                  color: "#B89614",
+                  fontSize: 48,
+                  mr: 2,
+                  alignItems: "center",
+                }}
+              >
+                B
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                {data[0].options[1]}
+              </Box>
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <Box id="box3" onClick={() => changeSelectedBox("box3")}
+            <Box
+              id="box3"
+              onClick={() => changeSelectedBox("box1")}
               sx={{
+                display: "flex",
                 height: 100,
-                backgroundColor: "gray",
+                boxShadow: 2,
+                p: 2,
+                backgroundColor: "spain_flag_yellow_light.main",
+                borderRadius: 4,
+                "&:hover": {
+                  backgroundColor: "secondary.main",
+                  opacity: [0.9, 0.8, 0.7],
+                },
               }}
             >
-              {data[0].options[2]}
+              <Box
+                typography="h1"
+                sx={{
+                  display: "flex",
+                  color: "#B89614",
+                  fontSize: 48,
+                  mr: 2,
+                  alignItems: "center",
+                }}
+              >
+                C
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                {data[0].options[2]}
+              </Box>
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <Box id="box4" onClick={() => changeSelectedBox("box4")}
+            <Box
+              id="box1"
+              onClick={() => changeSelectedBox("box1")}
               sx={{
+                display: "flex",
                 height: 100,
-                backgroundColor: "gray",
+                boxShadow: 2,
+                p: 2,
+                backgroundColor: "spain_flag_yellow_light.main",
+                borderRadius: 4,
+                "&:hover": {
+                  backgroundColor: "secondary.main",
+                  opacity: [0.9, 0.8, 0.7],
+                },
               }}
             >
-              {data[0].options[3]}
+              <Box
+                typography="h1"
+                sx={{
+                  display: "flex",
+                  color: "#B89614",
+                  fontSize: 48,
+                  mr: 2,
+                  alignItems: "center",
+                }}
+              >
+                D
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                {data[0].options[3]}
+              </Box>
             </Box>
           </Grid>
         </Grid>
+      </Box>
+
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <Avatar
+          sx={{ mr: 1 }}
+          alt="Remy Sharp"
+          src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+        />
+        <Avatar
+          sx={{ mr: 1 }}
+          alt="Remy Sharp"
+          src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80"
+        />
+        <Box typography="body1">eingeloggt</Box>
       </Box>
     </Container>
   );

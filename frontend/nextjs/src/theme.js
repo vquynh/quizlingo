@@ -13,11 +13,25 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
+    darkgray: {
+      main: "#212121",
+    },
+    lightgray: {
+      main: "#C4C4C4",
+    },
+    spain_flag_yellow_light: {
+      main: "#FAF1D1",
+    },
+    spain_flag_yellow_dark: {
+      main: "#B89614",
+    },
   },
   typography: {
     fontFamily: [
+      "Rubik",
       "Outfit",
       "BioRhyme",
+      "Readex Pro",
       "-apple-system",
       "BlinkMacSystemFont",
       '"Segoe UI"',
@@ -38,21 +52,31 @@ const theme = createTheme({
       fontFamily: "BioRhyme",
       fontWeight: 700,
       fontSize: "2rem",
+      color: "#212121",
     },
     h3: {
-      fontFamily: "Outfit",
-      fontWeight: 500,
+      fontFamily: "BioRhyme",
+      fontWeight: 700,
       fontSize: "1.67rem",
+      color: "#212121",
+    },
+    h4: {
+      fontFamily: "Rubik",
+      fontWeight: 600,
+      fontSize: "1.67rem",
+      color: "#212121",
     },
     body1: {
-      fontFamily: "Outfit",
+      fontFamily: "Rubik",
       fontWeight: 400,
       fontSize: "1.17rem",
+      color: "#212121",
     },
     body2: {
-      fontFamily: "Outfit",
+      fontFamily: "Rubik",
       fontWeight: 400,
       fontSize: "1rem",
+      color: "#212121",
     },
   },
 });
