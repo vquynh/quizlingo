@@ -1,5 +1,6 @@
 package de.oncampus.quizlingo.domain.dto;
 
+import com.github.javafaker.Faker;
 import de.oncampus.quizlingo.domain.model.Level;
 
 import java.util.Arrays;
@@ -8,7 +9,9 @@ import java.util.Date;
 public class PlayerDTO {
 
     public PlayerDTO(Long id) {
+        Faker faker = new Faker();
         this.id = id;
+        this.name = faker.name().fullName();
         this.profilePicUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
         this.country = "Germany";
         this.level = Arrays.stream(Level.values()).findAny().get();
@@ -20,6 +23,7 @@ public class PlayerDTO {
     }
 
     private Long id;
+    private String name;
     private String profilePicUrl;
     private String country;
     private Level level;
@@ -99,5 +103,13 @@ public class PlayerDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
