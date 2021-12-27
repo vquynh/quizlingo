@@ -1,6 +1,13 @@
 package de.oncampus.quizlingo.controller;
 
-public class AnswerResultMessage {
+
+public class PlayerAnswer {
+    String user;
+    String timestamp;
+    String sessionId;
+    int selectedAnswer;
+    long questionId;
+
     public String getUser() {
         return user;
     }
@@ -17,6 +24,14 @@ public class AnswerResultMessage {
         this.timestamp = timestamp;
     }
 
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
     public int getSelectedAnswer() {
         return selectedAnswer;
     }
@@ -31,30 +46,5 @@ public class AnswerResultMessage {
 
     public void setQuestionId(long questionId) {
         this.questionId = questionId;
-    }
-
-    public boolean isCorrect() {
-        return isCorrect;
-    }
-
-    public void setCorrect(boolean correct) {
-        isCorrect = correct;
-    }
-
-    String user;
-    String timestamp;
-    int selectedAnswer;
-    long questionId;
-    boolean isCorrect;
-
-    @Override
-    public String toString() {
-        return "AnswerResultMessage{" +
-                "user='" + user + '\'' +
-                ", timestamp='" + timestamp + '\'' +
-                ", selectedAnswer=" + selectedAnswer +
-                ", questionId=" + questionId +
-                ", isCorrect=" + isCorrect +
-                '}';
     }
 }
