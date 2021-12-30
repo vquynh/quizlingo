@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Avatar from "@mui/material/Avatar";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Toolbar from "@mui/material/Toolbar";
-import Grid from "@mui/material/Grid";
-import TimerIcon from "@mui/icons-material/Timer";
+import { Avatar, Box, LinearProgress, Stack, Typography } from "@mui/material";
+import Image from "next/image";
+import SpainPic from "../public/spain-bg.jpg";
+import { bgWrap, mobile } from "../styles.module.css";
+import { questions } from "./questions";
 
-const antworten = ["A", "B", "C", "D"];
+const options = ["A", "B", "C", "D"];
 
 export async function getStaticProps(context) {
   const res = await fetch(`https://quizlingo-backend.herokuapp.com/questions`);
@@ -29,55 +25,6 @@ export async function getStaticProps(context) {
 }
 
 export default function Game({ data }) {
-  const questions = [
-    {
-      questionText:
-        "Du möchtest sagen, dass du Antonio kennengelernt hast. Welcher Ausdruck ist hierfür korrekt?",
-      answerOptions: [
-        { answerText: "Conocía a Antonio.", isCorrect: false },
-        { answerText: "Conocí a Antonio.", isCorrect: true },
-        { answerText: "Conoceré a Antonio.", isCorrect: false },
-        { answerText: "Conozco a Antonio.", isCorrect: false },
-      ],
-    },
-    {
-      questionText:
-        "Der folgende Satz »Supongo que tus padres estarán ya en casa« heißt auf Deutsch: Ich vermute, dass deine Eltern schon zu Hause …",
-      answerOptions: [
-        {
-          answerText: "sein werden",
-          isCorrect: true,
-        },
-        {
-          answerText: "sind",
-          isCorrect: false,
-        },
-        { answerText: "gewesen sind", isCorrect: false },
-        { answerText: "waren", isCorrect: false },
-      ],
-    },
-    {
-      questionText:
-        "Welche Zeitform verbirgt sich im Satz »En 1989 tuvo lugar la reunificación alemana«?",
-      answerOptions: [
-        { answerText: "Imperfecto", isCorrect: false },
-        { answerText: "Perfecto", isCorrect: false },
-        { answerText: "Futuro I", isCorrect: false },
-        { answerText: "Indefinido", isCorrect: true },
-      ],
-    },
-    {
-      questionText:
-        "Welche Zeitform wird im Spanischen verwendet, wenn sich eine abgeschlossene Handlung auf den heutigen Tag bezieht?",
-      answerOptions: [
-        { answerText: "Perfecto", isCorrect: true },
-        { answerText: "Indefinido", isCorrect: false },
-        { answerText: "Imperfecto", isCorrect: false },
-        { answerText: "Pluscuamperfecto", isCorrect: false },
-      ],
-    },
-  ];
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -94,164 +41,254 @@ export default function Game({ data }) {
       setShowScore(true);
     }
   };
+
+  const [progress, setProgress] = React.useState(100);
+
+  // Set countdown to 10 seconds
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress === 0) {
+          return 100;
+        }
+        const diff = 0.1;
+        return oldProgress - diff;
+      });
+    }, 10);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="fixed">
-          <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Test de vocabulario
-            </Typography>
-            <Button color="inherit" href="/">
-              Salir
-            </Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          mt: 8,
-          py: 3,
-        }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Avatar
-            alt="Remy Sharp"
-            src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
-            sx={{ width: 80, height: 80, mr: 2, boxShadow: 2 }}
-          />
-
-          <Box typography="h2">{score}</Box>
-        </Box>
-
+    <div>
+      <div className={bgWrap}>
+        <Image
+          alt="SpainPic"
+          src={SpainPic}
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+        />
+      </div>
+      <div className={mobile}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            backgroundColor: "white",
+            borderBottomLeftRadius: 8,
+            borderBottomRightRadius: 8,
+            boxShadow: 8,
           }}
         >
-          <TimerIcon sx={{ fontSize: "2rem", mr: 1 }} />
-          <Box typography="h2">00:07</Box>
-        </Box>
-
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Box typography="h2">0</Box>
-          <Avatar
-            alt="Remy Sharp"
-            src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80"
-            sx={{ width: 80, height: 80, ml: 2, boxShadow: 2 }}
-          />
-        </Box>
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          backgroundColor: "spain_flag_yellow_light.main",
-          borderRadius: 3,
-          boxShadow: 2,
-        }}
-      >
-        <Box
-          typography="h1"
-          sx={{ ml: 2, mt: 0, color: "#B89614", fontSize: 48 }}
-        >
-          ?
-        </Box>
-        <Box
-          sx={{
-            flexGrow: 1,
-            height: 150,
-            p: 2,
-            mb: 2,
-          }}
-        >
-          <Typography
-            variant="h3"
-            gutterBottom
-            component="div"
-            sx={{ flexGrow: 1 }}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              p: 2,
+            }}
           >
-            Pregunta {currentQuestion + 1} de {questions.length}
-          </Typography>
-          {questions[currentQuestion].questionText}
-        </Box>
-      </Box>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Avatar
+                alt="Remy Sharp"
+                src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+                sx={{ width: 56, height: 56, mr: 1, boxShadow: 2 }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <Box typography="body2">Claire</Box>
+                <Box typography="h3">{score}</Box>
+              </Box>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                }}
+              >
+                <Box typography="body2">Marc</Box>
+                <Box typography="h3">0</Box>
+              </Box>
+              <Avatar
+                alt="Remy Sharp"
+                src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80"
+                sx={{ width: 56, height: 56, ml: 2, boxShadow: 2 }}
+              />
+            </Box>
+          </Box>
 
-      <Box sx={{ flexGrow: 1, my: 2 }}>
-        <Grid container spacing={2}>
-          {questions[currentQuestion].answerOptions.map(
-            (answerOption, index) => (
-              <Grid item xs={6}>
-                <Box
-                  id="box1"
-                  onClick={() =>
-                    handleAnswerOptionClick(answerOption.isCorrect)
-                  }
-                  sx={{
-                    display: "flex",
-                    height: 100,
-                    boxShadow: 2,
-                    p: 2,
-                    backgroundColor: "spain_flag_yellow_light.main",
-                    borderRadius: 4,
-                    "&:hover": {
-                      backgroundColor: "secondary.main",
-                      opacity: [0.9, 0.8, 0.7],
-                    },
-                  }}
-                >
+          <LinearProgress
+            variant="determinate"
+            value={progress}
+            sx={{
+              height: 8,
+              borderBottomLeftRadius: 16,
+              borderBottomRightRadius: 16,
+            }}
+          />
+        </Box>
+
+        <Box
+          sx={{
+            backgroundColor: "white",
+            mt: 4,
+            height: 600,
+            width: 600,
+            zIndex: "tooltip",
+            position: "absolute",
+            top: "10vh",
+            borderRadius: 4,
+            boxShadow: 8,
+          }}
+        >
+          <Box
+            sx={{
+              flexGrow: 1,
+              p: 2,
+            }}
+          >
+            <Typography
+              variant="questionNr"
+              gutterBottom
+              component="div"
+              sx={{ flexGrow: 1 }}
+            >
+              Pregunta {currentQuestion + 1} de {questions.length}
+            </Typography>
+
+            <Box
+              typography="h4"
+              sx={{
+                height: 120,
+              }}
+            >
+              {questions[currentQuestion].questionText}
+            </Box>
+
+            <Stack spacing={2}>
+              {questions[currentQuestion].answerOptions.map(
+                (answerOption, index) => (
                   <Box
-                    typography="h1"
+                    onClick={() =>
+                      handleAnswerOptionClick(answerOption.isCorrect)
+                    }
                     sx={{
                       display: "flex",
-                      color: "#B89614",
-                      fontSize: 48,
-                      mr: 2,
-                      alignItems: "center",
+                      boxShadow: 0,
+                      px: 1,
+                      py: 1,
+                      backgroundColor: "lightgray.lighter",
+                      borderRadius: 4,
+                      "&:hover": {
+                        backgroundColor: "secondary.main",
+                        opacity: [0.9, 0.8, 0.7],
+                      },
                     }}
                   >
-                    {antworten[index]}
+                    <Box
+                      typography="h1"
+                      sx={{
+                        display: "flex",
+                        color: "#B89614",
+                        backgroundColor: "white",
+                        boxShadow: 0,
+                        borderRadius: 12,
+                        width: 56,
+                        height: 56,
+                        fontSize: 32,
+                        fontWeight: 400,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        mr: 2,
+                      }}
+                    >
+                      {options[index]}
+                    </Box>
+                    <Box
+                      typography="body1"
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
+                      {answerOption.answerText}
+                    </Box>
                   </Box>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    {answerOption.answerText}
-                  </Box>
+                )
+              )}
+            </Stack>
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mt: 4,
+              }}
+            >
+              <Avatar
+                sx={{ mr: 1 }}
+                alt="Remy Sharp"
+                src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+              />
+              <Avatar
+                sx={{ mr: 1 }}
+                alt="Remy Sharp"
+                src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80"
+              />
+              <Box typography="body1">eingeloggt</Box>
+            </Box>
+
+            <Box sx={{ pt: 12 }}>
+              {showScore ? (
+                <Box typography="body1" color="white">
+                  Du hast {score} von {questions.length} Punkten erreicht.
                 </Box>
-              </Grid>
-            )
-          )}
-        </Grid>
-      </Box>
+              ) : (
+                ""
+              )}
+            </Box>
+          </Box>
+        </Box>
 
-      <Box
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
-        <Avatar
-          sx={{ mr: 1 }}
-          alt="Remy Sharp"
-          src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
-        />
-        <Avatar
-          sx={{ mr: 1 }}
-          alt="Remy Sharp"
-          src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80"
-        />
-        <Box typography="body1">eingeloggt</Box>
-      </Box>
-
-      <div className="app">
-        {showScore ? (
-          <div className="score-section">
-            Du hast {score} von {questions.length} Punkten erreicht.
-          </div>
-        ) : (
-          ""
-        )}
+        <Box
+          sx={{
+            bgcolor: "white",
+            color: "text.primary",
+            p: 2,
+            position: "absolute",
+            top: "16vh",
+            mx: 4,
+            zIndex: "modal",
+            backgroundColor: "white",
+            borderRadius: 4,
+            boxShadow: 8,
+            height: 600,
+            width: 600 - 64,
+          }}
+        ></Box>
+        <Box
+          sx={{
+            bgcolor: "white",
+            color: "text.primary",
+            p: 2,
+            position: "absolute",
+            top: "17.5vh",
+            mx: 8,
+            zIndex: "drawer",
+            backgroundColor: "white",
+            borderRadius: 4,
+            boxShadow: 8,
+            height: 600,
+            width: 600 - 128,
+          }}
+        ></Box>
       </div>
-    </Container>
+    </div>
   );
 }
