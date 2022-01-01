@@ -4,6 +4,9 @@ import { red } from "@mui/material/colors";
 // Create a theme instance.
 const theme = createTheme({
   palette: {
+    background: {
+      paper: "#212121",
+    },
     primary: {
       main: "#AA151B",
     },
@@ -18,6 +21,7 @@ const theme = createTheme({
     },
     lightgray: {
       main: "#C4C4C4",
+      lighter: "#E1E1E1",
     },
     spain_flag_yellow_light: {
       main: "#FAF1D1",
@@ -28,8 +32,9 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      "Rubik",
       "Outfit",
+
+      "Solway",
       "BioRhyme",
       "Readex Pro",
       "-apple-system",
@@ -44,36 +49,42 @@ const theme = createTheme({
       '"Segoe UI Symbol"',
     ].join(","),
     h1: {
-      fontFamily: "BioRhyme",
+      fontFamily: "Solway",
       fontWeight: 700,
       fontSize: "4rem",
     },
     h2: {
-      fontFamily: "BioRhyme",
+      fontFamily: "Solway",
       fontWeight: 700,
       fontSize: "2rem",
       color: "#212121",
     },
     h3: {
-      fontFamily: "BioRhyme",
+      fontFamily: "Solway",
       fontWeight: 700,
       fontSize: "1.67rem",
       color: "#212121",
     },
     h4: {
-      fontFamily: "Rubik",
-      fontWeight: 600,
-      fontSize: "1.67rem",
+      fontFamily: "Outfit",
+      fontWeight: 500,
+      fontSize: "1.5rem",
       color: "#212121",
     },
     body1: {
-      fontFamily: "Rubik",
+      fontFamily: "Outfit",
       fontWeight: 400,
       fontSize: "1.17rem",
       color: "#212121",
     },
     body2: {
-      fontFamily: "Rubik",
+      fontFamily: "Outfit",
+      fontWeight: 400,
+      fontSize: "1rem",
+      color: "#212121",
+    },
+    questionNr: {
+      fontFamily: "Solway",
       fontWeight: 400,
       fontSize: "1rem",
       color: "#212121",

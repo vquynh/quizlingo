@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@300;400;700;800&family=Outfit:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Spline+Sans:wght@400;500;600;700&family=Rubik:wght@300;400;500;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@300;400;700;800&family=Solway:wght@300;400;500;700;800&family=Outfit:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Spline+Sans:wght@400;500;600;700&family=Rubik:wght@300;400;500;600&display=swap"
           />
         </Head>
         <body>
