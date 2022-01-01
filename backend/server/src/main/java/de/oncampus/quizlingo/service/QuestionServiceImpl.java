@@ -34,6 +34,7 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionDTO toQuestionDTO(Question question) {
         List<String> terms = question.getTerms().stream().map(Term::getName).collect(Collectors.toList());
         return new QuestionDTO(
+                question.getId(),
                 question.getQuestionText(),
                 question.getTopic().getName(),
                 question.getLevel(),
@@ -49,12 +50,40 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionDTO addQuestion(QuestionDTO questionDTO) {
-        questionRepository.save(toQuestionEntity(questionDTO));
-        return questionDTO;
+        Question question = new Question();
+        questionRepository.save(toQuestionEntity(questionDTO, question));
+        return toQuestionDTO(question);
     }
 
-    private Question toQuestionEntity(QuestionDTO questionDTO) {
-        Question question = new Question();
+    @Override
+    public List<QuestionDTO> getQuestionsByTopic(String topicName) {
+        Topic topic = topicRepository.findByName(topicName);
+        if(topic == null){
+            topic = new Topic();
+            topic.setName(topicName);
+            topicRepository.save(topic);
+        }
+        return questionRepository.findQuestionsByTopic(topic).stream().map(this::toQuestionDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteQuestion(Long id) {
+        questionRepository.deleteById(id);
+    }
+
+    @Override
+    public QuestionDTO updateQuestion(Long id, QuestionDTO questionDTO) {
+        Question question = questionRepository.findById(id).orElse(new Question());
+        questionRepository.save(toQuestionEntity(questionDTO, question));
+        return toQuestionDTO(question);
+    }
+
+    private Question toQuestionEntity(QuestionDTO questionDTO, Question question) {
+        transferDataToEntity(questionDTO, question);
+        return question;
+    }
+
+    private void transferDataToEntity(QuestionDTO questionDTO, Question question) {
         question.setQuestionText(questionDTO.getQuestionText());
         Topic topic = topicRepository.findByName(questionDTO.getTopic());
         if(topic == null){
@@ -78,7 +107,6 @@ public class QuestionServiceImpl implements QuestionService {
 
         });
         question.setTerms(terms);
-        return question;
     }
 
 
