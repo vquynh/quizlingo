@@ -8,6 +8,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDTO getPlayer(long id) {
+
         return new PlayerDTO(id);
     }
 }
