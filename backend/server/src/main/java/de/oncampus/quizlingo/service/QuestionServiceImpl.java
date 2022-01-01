@@ -36,7 +36,7 @@ public class QuestionServiceImpl implements QuestionService {
         return new QuestionDTO(
                 question.getQuestionText(),
                 question.getTopic().getName(),
-                question.getLevel().name(),
+                question.getLevel(),
                 terms,
                 question.getOptions(),
                 question.getCorrectAnswer());
@@ -65,7 +65,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.setTopic(topic);
         question.setOptions(questionDTO.getOptions());
         question.setCorrectAnswer(questionDTO.getCorrectAnswer());
-        question.setLevel(Level.valueOf(questionDTO.getLevel()));
+        question.setLevel(questionDTO.getLevel());
         List<Term> terms = new ArrayList<>();
         questionDTO.getTerms().forEach(name -> {
             Term term = termRepository.findByName(name);

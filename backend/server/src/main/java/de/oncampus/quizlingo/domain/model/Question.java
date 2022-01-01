@@ -27,7 +27,7 @@ public class Question {
 
     private int correctAnswer;
 
-    private Level level;
+    private int level;
 
     public void setId(Long id) {
         this.id = id;
@@ -55,11 +55,11 @@ public class Question {
         }
     }
 
-    public Level getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(Level level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
