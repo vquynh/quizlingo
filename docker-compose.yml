@@ -22,3 +22,19 @@ services:
       - "8080:8080"
     links:
       - postgres
+  frontend-1:
+    build:
+      context: ./frontend/nextjs
+      dockerfile: Dockerfile
+    environment:
+      PORT: 3000
+    ports:
+      - "3000:3000"
+  frontend-2:
+    build:
+      context: ./frontend/nextjs
+      dockerfile: Dockerfile
+    environment:
+      PORT: 3001
+    ports:
+      - "3001:3001"

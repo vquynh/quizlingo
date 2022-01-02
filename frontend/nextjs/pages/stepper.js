@@ -7,9 +7,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import { fragen } from "./fragen";
-
-const antworten = ["A", "B", "C", "D"];
+import { fragen } from "../src/fragen";
 
 export default function TextMobileStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -53,8 +51,7 @@ export default function TextMobileStepper() {
             sx={{
               display: "flex",
               boxShadow: 0,
-              px: 1,
-              py: 1,
+              p: 2,
               backgroundColor: "lightgray.lighter",
               borderRadius: 4,
               "&:hover": {
@@ -63,26 +60,6 @@ export default function TextMobileStepper() {
               },
             }}
           >
-            <Box
-              typography="h1"
-              sx={{
-                display: "flex",
-                color: "#B89614",
-                backgroundColor: "white",
-                boxShadow: 0,
-                borderRadius: 12,
-                width: 56,
-                height: 56,
-                fontSize: 32,
-                fontWeight: 400,
-                alignItems: "center",
-                justifyContent: "center",
-                mr: 2,
-              }}
-            >
-              {antworten[currentQuestion]}
-            </Box>
-
             <Box
               typography="body1"
               sx={{ display: "flex", alignItems: "center" }}

@@ -26,8 +26,8 @@ public class QuestionController {
     }
 
     @PutMapping("/questions/{id}")
-    public QuestionDTO addQuestion(@PathVariable Long id, @RequestBody QuestionDTO questionDTO){
-        return questionService.updateQuestion(id, questionDTO);
+    public QuestionDTO addQuestion(@PathVariable Long id, @RequestBody QuestionCommand questionCommand){
+        return questionService.updateQuestion(id, questionCommand);
     }
 
     @DeleteMapping("/questions/{id}")
@@ -36,7 +36,7 @@ public class QuestionController {
     }
 
     @PostMapping("/questions")
-    public QuestionDTO addQuestion(@RequestBody QuestionDTO questionDTO){
-        return questionService.addQuestion(questionDTO);
+    public QuestionDTO addQuestion(@RequestBody QuestionCommand questionCommand){
+        return questionService.addQuestion(questionCommand);
     }
 }
