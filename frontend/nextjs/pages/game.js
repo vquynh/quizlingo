@@ -34,6 +34,7 @@ export default function Game({ data }) {
       setScore(score + 1);
     }
 
+    const diff = 10000;
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
@@ -48,11 +49,15 @@ export default function Game({ data }) {
   React.useEffect(() => {
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
-        if (oldProgress === 0) {
-          return 100;
-        }
         const diff = 0.1;
-        return oldProgress - diff;
+        const newProgress = Math.floor((oldProgress - diff) * 10) / 10;
+        console.log(newProgress);
+        if (newProgress < -10) {
+          console.log("Zeit abgelaufen!");
+          clearInterval(timer);
+          const nextQuestion = currentQuestion + 1;
+        }
+        return newProgress;
       });
     }, 10);
 
@@ -177,6 +182,7 @@ export default function Game({ data }) {
               {questions[currentQuestion].answerOptions.map(
                 (answerOption, index) => (
                   <Box
+                    id={"box" + index}
                     onClick={() =>
                       handleAnswerOptionClick(answerOption.isCorrect)
                     }

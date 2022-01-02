@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Box, Typography } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import Image from "next/image";
 import Link from "../src/Link";
 import Copyright from "../src/Copyright";
@@ -19,8 +19,22 @@ export default function Index() {
         />
       </div>
       <p className={bgText}>
-        <Button variant="contained" component={Link} noLinkStyle href="/game">
-          Spiel starten
+        <Button
+          variant="contained"
+          component={Link}
+          noLinkStyle
+          sx={{ mx: 2 }}
+          href="/game"
+        >
+          Spiel starten (funktioniert)
+        </Button>
+        <Button
+          variant="contained"
+          component={Link}
+          noLinkStyle
+          href="/stepper"
+        >
+          Spiel starten (in Dev)
         </Button>
       </p>
     </div>
