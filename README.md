@@ -9,6 +9,15 @@ In unserem Multiplayer-Game möchten wir den Lernprozess der spanischen Sprache 
 - Jörn Mathis Korfmann
 - Thi Viet Quynh Nguyen
 
+## Installation 
+Voraussetzung: Docker-Desktop
+- Falls noch nicht installiert, [Docker-Desktop](https://www.docker.com/get-started) herunterladen und installieren. 
+Nach der Installation Docker Version prüfen mit dem Befehl ```docker version```
+- Repository klonen mit ```git clone git@github.com:vquynh/quizlingo.git```
+- Im Hauptverzeichnis ```docker-compose up``` ausführen und warten bis die Services gestartet sind. 
+Beim ersten Installieren könnte es bis zu 7 Minuten dauern. Wenn fertig, kann das Backend unter http://localhost:8080 erreicht werden.
+- Eine API Dokumentation ist unter http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config zu finden
+
 ## Architekturdiagramm
 ![alt text](diagram/architecture%20diagram.png "architecture diagram")
 

@@ -4,7 +4,8 @@ import java.util.List;
 
 public class QuestionDTO {
 
-    public QuestionDTO(String name, String topic, Integer level, List<String> terms, List<String> options, Integer correctAnswer) {
+    public QuestionDTO(Long id, String name, String topic, Integer level, List<String> terms, List<String> options, Integer correctAnswer) {
+        this.id = id;
         this.questionText = name;
         this.level = level;
         this.topic = topic;
@@ -13,6 +14,7 @@ public class QuestionDTO {
         this.correctAnswer = correctAnswer;
     }
 
+    private Long id;
     private String questionText;
     private String topic;
     private List<String> terms;
@@ -66,5 +68,13 @@ public class QuestionDTO {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
