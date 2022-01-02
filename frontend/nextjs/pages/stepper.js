@@ -10,14 +10,11 @@ import {
 import { fragen } from "../src/fragen";
 
 export default function TextMobileStepper() {
+  const showAll = false;
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = fragen.length;
-
   const [reveal, setReveal] = useState(false);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const maxSteps = fragen.length;
 
   function meinTimeout() {
     setReveal(true);
@@ -28,49 +25,65 @@ export default function TextMobileStepper() {
     }, 3000);
   }
 
-  function revealAnswer() {
-    return (
-      <Box>Die richtige Antwort lautet: {fragen[activeStep].correctAnswer}</Box>
-    );
+  function answersBackground(index) {
+    selectedAnswer = setSelectedAnswer(index);
+    const rightAnswer = fragen[activeStep].correctAnswer;
+    const answers = document.querySelectorAll(".example");
+    answers[rightAnswer].style.backgroundColor = "green";
+    if (index != rightAnswer) {
+      answers[index].style.backgroundColor = "red";
+    }
+    setTimeout(function () {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setReveal(false);
+      answers[index].style.backgroundColor = "";
+      answers[rightAnswer].style.backgroundColor = "";
+    }, 2000);
   }
 
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [showScore, setShowScore] = useState(false);
-  const [score, setScore] = useState(0);
-  const [progress, setProgress] = React.useState(100);
-
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-      <Typography>{fragen[activeStep].questionText}</Typography>
-
-      <Stack spacing={2}>
-        {fragen[activeStep].options.map((option, index) => (
-          <Box
-            id={index}
-            onClick={meinTimeout}
-            sx={{
-              display: "flex",
-              boxShadow: 0,
-              p: 2,
-              backgroundColor: "lightgray.lighter",
-              borderRadius: 4,
-              "&:hover": {
-                backgroundColor: "secondary.main",
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-          >
-            <Box
-              typography="body1"
-              sx={{ display: "flex", alignItems: "center" }}
-            >
-              {option}
-            </Box>
-          </Box>
-        ))}
-      </Stack>
-
-      <Box>{reveal ? revealAnswer() : ""}</Box>
+    <Box sx={{ maxWidth: 600, flexGrow: 1, p: 2 }}>
+      <Typography gutterBottom>{fragen[activeStep].taskText}</Typography>
+      <Typography variant="h3">{fragen[activeStep].questionText}</Typography>
+      {fragen[activeStep].options.map((option, index) => (
+        <p id={index} class="example" onClick={() => answersBackground(index)}>
+          {option}
+        </p>
+      ))}
+      {showAll ? (
+        <React.Fragment>
+          <Button onClick={answersBackground}>Button</Button>
+          <Stack spacing={2}>
+            {fragen[activeStep].options.map((option, index) => (
+              <Box
+                class="example"
+                id={index}
+                onClick={meinTimeout}
+                sx={{
+                  display: "flex",
+                  boxShadow: 0,
+                  p: 2,
+                  backgroundColor: "lightgray.lighter",
+                  borderRadius: 4,
+                  "&:hover": {
+                    backgroundColor: "secondary.main",
+                    opacity: [0.9, 0.8, 0.7],
+                  },
+                }}
+              >
+                <Box
+                  typography="body1"
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  {option}
+                </Box>
+              </Box>
+            ))}
+          </Stack>
+        </React.Fragment>
+      ) : (
+        ""
+      )}
 
       <Stepper
         variant="text"

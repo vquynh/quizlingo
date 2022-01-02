@@ -33,7 +33,6 @@ const theme = createTheme({
   typography: {
     fontFamily: [
       "Outfit",
-
       "Solway",
       "BioRhyme",
       "Readex Pro",
