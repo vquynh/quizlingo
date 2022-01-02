@@ -3,9 +3,7 @@ import { Avatar, Box, LinearProgress, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import SpainPic from "../public/spain-bg.jpg";
 import { bgWrap, mobile } from "../styles.module.css";
-import { questions } from "./questions";
-
-const options = ["A", "B", "C", "D"];
+import { questions } from "../src/questions";
 
 export async function getStaticProps(context) {
   const res = await fetch(`https://quizlingo-backend.herokuapp.com/questions`);
@@ -189,8 +187,7 @@ export default function Game({ data }) {
                     sx={{
                       display: "flex",
                       boxShadow: 0,
-                      px: 1,
-                      py: 1,
+                      p: 2,
                       backgroundColor: "lightgray.lighter",
                       borderRadius: 4,
                       "&:hover": {
@@ -199,25 +196,6 @@ export default function Game({ data }) {
                       },
                     }}
                   >
-                    <Box
-                      typography="h1"
-                      sx={{
-                        display: "flex",
-                        color: "#B89614",
-                        backgroundColor: "white",
-                        boxShadow: 0,
-                        borderRadius: 12,
-                        width: 56,
-                        height: 56,
-                        fontSize: 32,
-                        fontWeight: 400,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mr: 2,
-                      }}
-                    >
-                      {options[index]}
-                    </Box>
                     <Box
                       typography="body1"
                       sx={{ display: "flex", alignItems: "center" }}
