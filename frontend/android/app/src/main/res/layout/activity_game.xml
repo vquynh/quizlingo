@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Left image set in a rounded cardView with a scaled and centered image-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewGameSelfImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="100dp">
+        <ImageView
+            android:id="@+id/imageViewGameSelfImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/textViewGameSelfName"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
+
+    <!--Left name which is constrained to the left image-->
+    <TextView
+        android:id="@+id/textViewGameSelfName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/textViewGameSelfName"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/cardViewGameSelfImage"
+        app:layout_constraintTop_toTopOf="@+id/cardViewGameSelfImage" />
+
+    <!--Left point counter which is constrained to the name above-->
+    <TextView
+        android:id="@+id/textViewGameSelfPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/textViewGameSelfPoints"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textViewGameSelfName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGameSelfName" />
+
+    <!--Right image set in a rounded cardView with a scaled and centered image-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewGameOtherImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/imageViewGameOtherImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/textViewGameOtherName"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
+
+    <!--Right name which is constrained to the right image-->
+    <TextView
+        android:id="@+id/textViewGameOtherName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/textViewGameOtherName"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/cardViewGameOtherImage"
+        app:layout_constraintTop_toTopOf="@+id/cardViewGameOtherImage" />
+
+    <!--Right point counter which is constrained to the name above-->
+    <TextView
+        android:id="@+id/textViewGameOtherPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/textViewGameOtherPoints"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textViewGameOtherName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGameOtherName" />
+
+    <!--Progressbar which is used to display the remaining time-->
+    <ProgressBar
+        android:id="@+id/progressBarGame"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewGameSelfImage" />
+
+    <!--Textview which displays the questioncount-->
+    <TextView
+        android:id="@+id/textViewGameQuestionCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/textViewGameQuestionCount"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarGame" />
+
+    <!--Textview which displays the current question-->
+    <TextView
+        android:id="@+id/textViewGameQuestion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/textViewGameQuestion"
+        android:textAlignment="viewStart"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textViewGameQuestionCount"
+        app:layout_constraintStart_toStartOf="@+id/textViewGameQuestionCount"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGameQuestionCount" />
+
+    <!--Button for the A answer-->
+    <Button
+        android:id="@+id/buttonGameA"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/spain_flag_yellow_dark"
+        android:text="@string/buttonGameA"
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewGameQuestion"
+        app:layout_constraintStart_toStartOf="@+id/textViewGameQuestion"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGameQuestion" />
+
+    <!--Button for the B answer-->
+    <Button
+        android:id="@+id/buttonGameB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/spain_flag_yellow_dark"
+        android:text="@string/buttonGameB"
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonGameA"
+        app:layout_constraintStart_toStartOf="@+id/buttonGameA"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGameA" />
+
+    <!--Button for the C answer-->
+    <Button
+        android:id="@+id/buttonGameC"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/spain_flag_yellow_dark"
+        android:text="@string/buttonGameC"
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonGameB"
+        app:layout_constraintStart_toStartOf="@+id/buttonGameB"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGameB" />
+
+    <!--Button for the D answer-->
+    <Button
+        android:id="@+id/buttonGameD"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/spain_flag_yellow_dark"
+        android:text="@string/buttonGameD"
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonGameC"
+        app:layout_constraintStart_toStartOf="@+id/buttonGameC"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGameC" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
