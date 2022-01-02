@@ -1,16 +1,18 @@
-package de.oncampus.quizlingo.domain.dto;
+package de.oncampus.quizlingo.controller;
 
 import java.util.List;
 
-public class QuestionDTO {
+public class QuestionCommand {
 
-    public QuestionDTO(Long id, String name, String topic, Integer level, List<String> terms, List<String> options) {
+
+    public QuestionCommand(Long id, String name, String topic, Integer level, List<String> terms, List<String> options, Integer correctAnswer) {
         this.id = id;
         this.questionText = name;
         this.level = level;
         this.topic = topic;
         this.terms = terms;
         this.options = options;
+        this.correctAnswer = correctAnswer;
     }
 
     private Long id;
@@ -67,5 +69,13 @@ public class QuestionDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(Integer correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
 }

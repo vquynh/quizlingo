@@ -1,5 +1,6 @@
 package de.oncampus.quizlingo.service;
 
+import de.oncampus.quizlingo.controller.QuestionCommand;
 import de.oncampus.quizlingo.domain.dto.QuestionDTO;
 import de.oncampus.quizlingo.domain.model.*;
 import de.oncampus.quizlingo.repository.QuestionRepository;
@@ -39,8 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
                 question.getTopic().getName(),
                 question.getLevel(),
                 terms,
-                question.getOptions(),
-                question.getCorrectAnswer());
+                question.getOptions());
     }
 
     @Override
@@ -49,9 +49,9 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public QuestionDTO addQuestion(QuestionDTO questionDTO) {
+    public QuestionDTO addQuestion(QuestionCommand createQuestionCommand) {
         Question question = new Question();
-        questionRepository.save(toQuestionEntity(questionDTO, question));
+        questionRepository.save(toQuestionEntity(createQuestionCommand, question));
         return toQuestionDTO(question);
     }
 
@@ -72,31 +72,31 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public QuestionDTO updateQuestion(Long id, QuestionDTO questionDTO) {
+    public QuestionDTO updateQuestion(Long id, QuestionCommand questionCommand) {
         Question question = questionRepository.findById(id).orElse(new Question());
-        questionRepository.save(toQuestionEntity(questionDTO, question));
+        questionRepository.save(toQuestionEntity(questionCommand, question));
         return toQuestionDTO(question);
     }
 
-    private Question toQuestionEntity(QuestionDTO questionDTO, Question question) {
-        transferDataToEntity(questionDTO, question);
+    private Question toQuestionEntity(QuestionCommand createQuestionCommand, Question question) {
+        transferDataToEntity(createQuestionCommand, question);
         return question;
     }
 
-    private void transferDataToEntity(QuestionDTO questionDTO, Question question) {
-        question.setQuestionText(questionDTO.getQuestionText());
-        Topic topic = topicRepository.findByName(questionDTO.getTopic());
+    private void transferDataToEntity(QuestionCommand createQuestionCommand, Question question) {
+        question.setQuestionText(createQuestionCommand.getQuestionText());
+        Topic topic = topicRepository.findByName(createQuestionCommand.getTopic());
         if(topic == null){
             topic = new Topic();
-            topic.setName(questionDTO.getTopic());
+            topic.setName(createQuestionCommand.getTopic());
             topicRepository.save(topic);
         }
         question.setTopic(topic);
-        question.setOptions(questionDTO.getOptions());
-        question.setCorrectAnswer(questionDTO.getCorrectAnswer());
-        question.setLevel(questionDTO.getLevel());
+        question.setOptions(createQuestionCommand.getOptions());
+        question.setCorrectAnswer(createQuestionCommand.getCorrectAnswer());
+        question.setLevel(createQuestionCommand.getLevel());
         List<Term> terms = new ArrayList<>();
-        questionDTO.getTerms().forEach(name -> {
+        createQuestionCommand.getTerms().forEach(name -> {
             Term term = termRepository.findByName(name);
             if (term == null){
                 term = new Term();
