@@ -1,36 +1,35 @@
 package de.oncampus.quizlingo.domain.dto;
 
 import com.github.javafaker.Faker;
-import de.oncampus.quizlingo.domain.model.Level;
 
-import java.util.Arrays;
 import java.util.Date;
 
 public class PlayerDTO {
 
-    public PlayerDTO(Long id) {
-        Faker faker = new Faker();
-        this.id = id;
-        this.name = faker.name().fullName();
+    public PlayerDTO(String username) {
+        this.username = username;
         this.profilePicUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
         this.country = "Germany";
-        this.level = Arrays.stream(Level.values()).findAny().get();
-        this.totalScore = 1000;
-        this.highScore = 50;
-        this.averageScore = 40;
+        this.level = 1;
+        this.totalScore = 0;
+        this.highScore = 0;
+        this.averageScore = 0;
+        this.totalGames = 0;
+        this.winningPercentage = 0;
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }
 
-    private Long id;
-    private String name;
+    private String username;
     private String profilePicUrl;
     private String country;
-    private Level level;
+    private Integer level;
 
-    private int totalScore;
-    private int highScore;
-    private int averageScore;
+    private Integer totalScore;
+    private float winningPercentage;
+    private Integer totalGames;
+    private Integer highScore;
+    private Integer averageScore;
     private Date createdAt;
     private Date updatedAt;
     public String getCountry() {
@@ -41,11 +40,11 @@ public class PlayerDTO {
         this.country = country;
     }
 
-    public Level getLevel() {
+    public Integer getLevel() {
         return level;
     }
 
-    public void setLevel(Level level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
@@ -97,19 +96,27 @@ public class PlayerDTO {
         this.averageScore = averageScore;
     }
 
-    public Long getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public Integer getTotalGames() {
+        return totalGames;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTotalGames(Integer totalGames) {
+        this.totalGames = totalGames;
+    }
+
+    public float getWinningPercentage() {
+        return winningPercentage;
+    }
+
+    public void setWinningPercentage(long winningPercentage) {
+        this.winningPercentage = winningPercentage;
     }
 }

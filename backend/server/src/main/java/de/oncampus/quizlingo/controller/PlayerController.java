@@ -15,9 +15,9 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @GetMapping("/players/{id}")
-    public PlayerDTO getPlayer(@PathVariable String id){
-        return playerService.getPlayer(Long.parseLong(id));
+    @GetMapping("/players/{username}")
+    public PlayerDTO getPlayerByUserName(@PathVariable String username){
+        return playerService.getPlayerByUsername(username);
     }
 
 

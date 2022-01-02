@@ -1,15 +1,17 @@
 package de.oncampus.quizlingo.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Entity
 public class Question {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToOne
@@ -20,13 +22,12 @@ public class Question {
     @OneToMany
     private List<Term> terms;
 
-    @OneToMany
-    private List<Option> options;
+    @ElementCollection
+    Map<Integer, String> options = new HashMap<>();
 
-    @OneToOne
-    private Option answer;
+    private int correctAnswer;
 
-    private Level level;
+    private int level;
 
     public void setId(Long id) {
         this.id = id;
@@ -44,28 +45,45 @@ public class Question {
         this.questionText = questionText;
     }
 
-    public List<Option> getOptions() {
-        return options;
+    public List<String> getOptions() {
+        return new ArrayList<>(options.values());
     }
 
-    public void setOptions(List<Option> options) {
-        this.options = options;
+    public void setOptions(List<String> optionsText) {
+        for (int i = 0; i < optionsText.size(); i++) {
+            this.options.put(i, optionsText.get(i));
+        }
     }
 
-    public Option getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(Option answer) {
-        this.answer = answer;
-    }
-
-    public Level getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(Level level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
+    public List<Term> getTerms() {
+        return terms;
+    }
+
+    public void setTerms(List<Term> terms) {
+        this.terms = terms;
+    }
+
+    public int getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(int correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
 }

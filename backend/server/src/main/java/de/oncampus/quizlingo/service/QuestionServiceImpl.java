@@ -1,29 +1,112 @@
 package de.oncampus.quizlingo.service;
 
 import de.oncampus.quizlingo.domain.dto.QuestionDTO;
-import de.oncampus.quizlingo.domain.dto.TopicDTO;
+import de.oncampus.quizlingo.domain.model.*;
+import de.oncampus.quizlingo.repository.QuestionRepository;
+import de.oncampus.quizlingo.repository.TermRepository;
+import de.oncampus.quizlingo.repository.TopicRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
+
+    private final QuestionRepository questionRepository;
+    private final TermRepository termRepository;
+    private final TopicRepository topicRepository;
+
+    public QuestionServiceImpl(QuestionRepository questionRepository, TermRepository termRepository, TopicRepository topicRepository) {
+        this.questionRepository = questionRepository;
+        this.termRepository = termRepository;
+        this.topicRepository = topicRepository;
+    }
+
     @Override
     public List<QuestionDTO> getAllQuestions() {
-        TopicDTO topicDTO = new TopicDTO("Test topic");
-        return List.of(
-                new QuestionDTO("Question 1", topicDTO, new ArrayList<>(), List.of("A - Option 1", "B - Option 2", "C - Option 3", "D - Option 4"), 0),
-                new QuestionDTO("Question 2", topicDTO, new ArrayList<>(), List.of("A - Option 1", "B - Option 2", "C - Option 3", "D - Option 4"), 1),
-                new QuestionDTO("Question 3", topicDTO, new ArrayList<>(), List.of("A - Option 1", "B - Option 2", "C - Option 3", "D - Option 4"), 2),
-                new QuestionDTO("Question 4", topicDTO, new ArrayList<>(), List.of("A - Option 1", "B - Option 2", "C - Option 3", "D - Option 4"), 3),
-                new QuestionDTO("Question 5", topicDTO, new ArrayList<>(), List.of("A - Option 1", "B - Option 2", "C - Option 3", "D - Option 4"), 0));
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+        questionRepository.findAll().iterator().forEachRemaining(question -> questionDTOS.add(toQuestionDTO(question)));
+        return questionDTOS;
+    }
+
+    private QuestionDTO toQuestionDTO(Question question) {
+        List<String> terms = question.getTerms().stream().map(Term::getName).collect(Collectors.toList());
+        return new QuestionDTO(
+                question.getId(),
+                question.getQuestionText(),
+                question.getTopic().getName(),
+                question.getLevel(),
+                terms,
+                question.getOptions(),
+                question.getCorrectAnswer());
     }
 
     @Override
     public QuestionDTO getQuestion(long id) {
-        TopicDTO topicDTO = new TopicDTO("Test topic");
-        return new QuestionDTO("Question 1", topicDTO, new ArrayList<>(), List.of("A - Option 1", "B - Option 2", "C - Option 3", "D - Option 4"), 0);
+        return questionRepository.findById(id).map(this::toQuestionDTO).orElse(null);
+    }
+
+    @Override
+    public QuestionDTO addQuestion(QuestionDTO questionDTO) {
+        Question question = new Question();
+        questionRepository.save(toQuestionEntity(questionDTO, question));
+        return toQuestionDTO(question);
+    }
+
+    @Override
+    public List<QuestionDTO> getQuestionsByTopic(String topicName) {
+        Topic topic = topicRepository.findByName(topicName);
+        if(topic == null){
+            topic = new Topic();
+            topic.setName(topicName);
+            topicRepository.save(topic);
+        }
+        return questionRepository.findQuestionsByTopic(topic).stream().map(this::toQuestionDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteQuestion(Long id) {
+        questionRepository.deleteById(id);
+    }
+
+    @Override
+    public QuestionDTO updateQuestion(Long id, QuestionDTO questionDTO) {
+        Question question = questionRepository.findById(id).orElse(new Question());
+        questionRepository.save(toQuestionEntity(questionDTO, question));
+        return toQuestionDTO(question);
+    }
+
+    private Question toQuestionEntity(QuestionDTO questionDTO, Question question) {
+        transferDataToEntity(questionDTO, question);
+        return question;
+    }
+
+    private void transferDataToEntity(QuestionDTO questionDTO, Question question) {
+        question.setQuestionText(questionDTO.getQuestionText());
+        Topic topic = topicRepository.findByName(questionDTO.getTopic());
+        if(topic == null){
+            topic = new Topic();
+            topic.setName(questionDTO.getTopic());
+            topicRepository.save(topic);
+        }
+        question.setTopic(topic);
+        question.setOptions(questionDTO.getOptions());
+        question.setCorrectAnswer(questionDTO.getCorrectAnswer());
+        question.setLevel(questionDTO.getLevel());
+        List<Term> terms = new ArrayList<>();
+        questionDTO.getTerms().forEach(name -> {
+            Term term = termRepository.findByName(name);
+            if (term == null){
+                term = new Term();
+                term.setName(name);
+                termRepository.save(term);
+            }
+            terms.add(term);
+
+        });
+        question.setTerms(terms);
     }
 
 

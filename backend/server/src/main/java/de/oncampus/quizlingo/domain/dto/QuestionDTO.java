@@ -4,19 +4,23 @@ import java.util.List;
 
 public class QuestionDTO {
 
-    public QuestionDTO(String name, TopicDTO topic, List<String> terms, List<String> options, int correctAnswer) {
+    public QuestionDTO(Long id, String name, String topic, Integer level, List<String> terms, List<String> options, Integer correctAnswer) {
+        this.id = id;
         this.questionText = name;
+        this.level = level;
         this.topic = topic;
         this.terms = terms;
         this.options = options;
         this.correctAnswer = correctAnswer;
     }
 
+    private Long id;
     private String questionText;
-    private TopicDTO topic;
+    private String topic;
     private List<String> terms;
     private List<String> options;
-    private int correctAnswer;
+    private Integer correctAnswer;
+    private Integer level;
 
     public String getQuestionText() {
         return questionText;
@@ -26,11 +30,11 @@ public class QuestionDTO {
         this.questionText = questionText;
     }
 
-    public TopicDTO getTopic() {
+    public String getTopic() {
         return topic;
     }
 
-    public void setTopic(TopicDTO topic) {
+    public void setTopic(String topic) {
         this.topic = topic;
     }
 
@@ -50,11 +54,27 @@ public class QuestionDTO {
         this.options = options;
     }
 
-    public int getCorrectAnswer() {
+    public Integer getCorrectAnswer() {
         return correctAnswer;
     }
 
-    public void setCorrectAnswer(int correctAnswer) {
+    public void setCorrectAnswer(Integer correctAnswer) {
         this.correctAnswer = correctAnswer;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

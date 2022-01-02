@@ -6,7 +6,9 @@ import java.util.List;
 
 @Entity
 public class Round {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToMany(targetEntity=Question.class, fetch= FetchType.EAGER)
