@@ -1,112 +1,109 @@
 import React, { useState } from "react";
 import {
   Box,
+  Button,
   Divider,
+  LinearProgress,
   MobileStepper,
   Stack,
   Stepper,
   Typography,
-  Button,
 } from "@mui/material";
+import theme from "../src/theme";
 import { styled } from "@mui/material/styles";
 import { fragen } from "../src/fragen";
+import { DriveEtaOutlined } from "@mui/icons-material";
 
 export default function TextMobileStepper() {
-  const showAll = false;
   const [activeStep, setActiveStep] = React.useState(0);
-  const [reveal, setReveal] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [backgroundCol, setbackgroundCol] = useState("gray");
+  const [score, setScore] = useState(0);
+  const [progress, setProgress] = React.useState(100);
   const maxSteps = fragen.length;
 
-  const MyButton = styled(Button)({
-    backgroundColor: backgroundCol,
-    border: 0,
-    borderRadius: 10,
-    color: "white",
-    height: 48,
-    padding: "0 30px",
-    margin: "30px",
-  });
+  const optionStyle = {
+    backgroundColor: theme.palette.lightgray.lighter,
+    padding: 16,
+  };
 
-  function meinTimeout() {
-    setReveal(true);
+  // Set countdown to 10 seconds
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        const diff = 0.1;
+        const newProgress = Math.floor((oldProgress - diff) * 10) / 10;
+        if (newProgress < -10) {
+          console.log("Zeit abgelaufen!");
+          clearInterval(timer);
+        }
+        return newProgress;
+      });
+    }, 10);
 
-    setTimeout(function () {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      setReveal(false);
-    }, 3000);
-  }
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   function answersBackground(index) {
     selectedAnswer = setSelectedAnswer(index);
     const rightAnswer = fragen[activeStep].correctAnswer;
     const answers = document.querySelectorAll(".example");
-    answers[rightAnswer].style.backgroundColor = "green";
+    setProgress(0);
 
-    if (answers.id == 1) {
-      setbackgroundCol("black");
-    }
-    if (index != rightAnswer) {
+    if (index === rightAnswer) {
+      answers[index].style.backgroundColor = "green";
+      setScore(score + 1);
+    } else {
       answers[index].style.backgroundColor = "red";
+      answers[rightAnswer].style.backgroundColor = "green";
     }
+
     setTimeout(function () {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      setReveal(false);
-      answers[index].style.backgroundColor = "";
-
-      answers[rightAnswer].style.backgroundColor = "";
+      answers[index].style.backgroundColor = theme.palette.lightgray.lighter;
+      answers[rightAnswer].style.backgroundColor =
+        theme.palette.lightgray.lighter;
     }, 2000);
   }
 
   return (
     <Box sx={{ maxWidth: 600, flexGrow: 1, p: 2 }}>
+      <LinearProgress
+        variant="determinate"
+        value={progress}
+        sx={{
+          height: 8,
+          my: 2,
+        }}
+      />
+
+      <Typography variant="body1">
+        Dein aktueller Punktestand: {score}
+      </Typography>
+
+      <Divider sx={{ my: 2 }} />
+
       <Typography gutterBottom>{fragen[activeStep].taskText}</Typography>
       <Typography variant="h3" gutterBottom>
         {fragen[activeStep].questionText}
       </Typography>
 
-      {fragen[activeStep].options.map((option, index) => (
-        <p id={index} class="example" onClick={() => answersBackground(index)}>
-          {option}
-        </p>
-      ))}
-      {showAll ? (
-        <React.Fragment>
-          <Button onClick={answersBackground}>Button</Button>
-          <Stack spacing={2}>
-            {fragen[activeStep].options.map((option, index) => (
-              <Box
-                class="example"
-                id={index}
-                onClick={meinTimeout}
-                sx={{
-                  display: "flex",
-                  boxShadow: 0,
-                  p: 2,
-                  backgroundColor: "lightgray.lighter",
-                  borderRadius: 4,
-                  "&:hover": {
-                    backgroundColor: "secondary.main",
-                    opacity: [0.9, 0.8, 0.7],
-                  },
-                }}
-              >
-                <Box
-                  typography="body1"
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  {option}
-                </Box>
-              </Box>
-            ))}
-          </Stack>
-        </React.Fragment>
-      ) : (
-        ""
-      )}
+      <Stack spacing={2}>
+        {fragen[activeStep].options.map((option, index) => (
+          <div
+            style={optionStyle}
+            id={index}
+            class="example"
+            onClick={() => answersBackground(index)}
+          >
+            {option}
+          </div>
+        ))}
+      </Stack>
 
-      <Divider sx={{ mb: 4 }} />
+      <Divider sx={{ my: 4 }} />
 
       <Box sx={{ backgroundColor: backgroundCol, color: "white" }}>
         Ich bin ein Test

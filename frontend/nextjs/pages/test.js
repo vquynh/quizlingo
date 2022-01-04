@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../styles/styles.module.css";
+import styles from "../styles.module.css";
 
 export default function App() {
   const [myColor, setMyColor] = useState("blue");
