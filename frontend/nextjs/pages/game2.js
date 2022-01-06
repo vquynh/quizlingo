@@ -6,25 +6,32 @@ import {
   LinearProgress,
   MobileStepper,
   Stack,
-  Stepper,
   Typography,
 } from "@mui/material";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import theme from "../src/theme";
-import { styled } from "@mui/material/styles";
 import { fragen } from "../src/fragen";
-import { DriveEtaOutlined } from "@mui/icons-material";
 
 export default function TextMobileStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [backgroundCol, setbackgroundCol] = useState("gray");
   const [score, setScore] = useState(0);
   const [progress, setProgress] = React.useState(100);
   const maxSteps = fragen.length;
 
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
   const optionStyle = {
     backgroundColor: theme.palette.lightgray.lighter,
     padding: 16,
+    borderRadius: 16,
   };
 
   // Set countdown to 10 seconds
@@ -69,7 +76,7 @@ export default function TextMobileStepper() {
   }
 
   return (
-    <Box sx={{ maxWidth: 600, flexGrow: 1, p: 2 }}>
+    <Box sx={{ mx: "auto", maxWidth: "md", flexGrow: 1, p: 2 }}>
       <LinearProgress
         variant="determinate"
         value={progress}
@@ -102,21 +109,35 @@ export default function TextMobileStepper() {
           </div>
         ))}
       </Stack>
-
-      <Divider sx={{ my: 4 }} />
-
-      <Box sx={{ backgroundColor: backgroundCol, color: "white" }}>
-        Ich bin ein Test
-      </Box>
-      <Box onClick={() => setbackgroundCol("red")}>
-        Klick mich, um die Farbe der Box rot einzufärben.
-      </Box>
-
-      <Stepper
+      <MobileStepper
         variant="text"
         steps={maxSteps}
         position="static"
         activeStep={activeStep}
+        nextButton={
+          <Button
+            size="small"
+            onClick={handleNext}
+            disabled={activeStep === maxSteps - 1}
+          >
+            Next
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowLeft />
+            ) : (
+              <KeyboardArrowRight />
+            )}
+          </Button>
+        }
+        backButton={
+          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
+            Back
+          </Button>
+        }
       />
     </Box>
   );

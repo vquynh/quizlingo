@@ -15,7 +15,8 @@
     "react": "latest",
     "react-dom": "latest",
     "socket.io": "^4.4.0",
-    "socket.io-client": "^4.4.0"
+    "socket.io-client": "^4.4.0",
+    "ws": "^8.4.0"
   },
   "scripts": {
     "dev": "next",

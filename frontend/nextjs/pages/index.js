@@ -1,23 +1,36 @@
 import * as React from "react";
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { useRouter } from "next/router";
+import { styled } from "@mui/material/styles";
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Button,
+  Fab,
+  IconButton,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import AddIcon from "@mui/icons-material/Add";
+import PersonIcon from "@mui/icons-material/Person";
+import SearchIcon from "@mui/icons-material/Search";
+import MoreIcon from "@mui/icons-material/MoreVert";
 import Link from "../src/Link";
-import SpainPic from "../public/spain-bg.jpg";
-import { bgWrap, bgText, mobile } from "../styles.module.css";
 
-// Websocket
-const { io } = require("socket.io-client");
-const socket = io("wss://quizlingo-backend.herokuapp.com/websocket");
-
-socket.on("connect", () => {
-  console.log(socket.id);
-});
-
-socket.on("disconnect", () => {
-  console.log(socket.id); // undefined
+const StyledFab = styled(Fab)({
+  position: "absolute",
+  zIndex: 1,
+  top: -30,
+  left: 0,
+  right: 0,
+  margin: "0 auto",
 });
 
 export default function Index() {
+  const router = useRouter();
+
   return (
     <Stack
       container
@@ -30,7 +43,7 @@ export default function Index() {
       <Typography variant="h2">Quiz starten</Typography>
       <Stack spacing={2} sx={{ alignItems: "flex-start" }}>
         <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
-          <Button variant="contained" component={Link} href="/game">
+          <Button variant="contained" component={Link} href="/game1">
             Quiz 1
           </Button>
           <Typography variant="body2">
@@ -38,7 +51,7 @@ export default function Index() {
           </Typography>
         </Stack>
         <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
-          <Button variant="contained" component={Link} href="/stepper">
+          <Button variant="contained" component={Link} href="/game2">
             Quiz 2
           </Button>
           <Typography variant="body2">
@@ -46,6 +59,20 @@ export default function Index() {
           </Typography>
         </Stack>
       </Stack>
+      <AppBar position="fixed" color="primary" sx={{ top: "auto", bottom: 0 }}>
+        <Toolbar>
+          <IconButton color="inherit" aria-label="open drawer">
+            <MenuIcon />
+          </IconButton>
+          <StyledFab color="secondary" aria-label="add" href="/game2">
+            <AddIcon />
+          </StyledFab>
+          <Box sx={{ flexGrow: 1 }} />
+          <Avatar onClick={() => router.push("/login")}>
+            <PersonIcon />
+          </Avatar>
+        </Toolbar>
+      </AppBar>
     </Stack>
   );
 }
