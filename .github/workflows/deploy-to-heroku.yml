@@ -4,6 +4,8 @@ on:
   push: 
     branches:
       - main # build will be triggered on git push to this branch
+    paths:
+      - backend
 
 jobs:
   build-and-test: # first job build and run test using mvn package
