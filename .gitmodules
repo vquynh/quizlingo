@@ -1,0 +1,3 @@
+[submodule "frontend/nextjs-chakra-ui"]
+	path = frontend/nextjs-chakra-ui
+	url = git@github.com:joernkgrp/quizlingo-chakra-ui.git
