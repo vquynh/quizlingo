@@ -86,7 +86,7 @@ public class TopicRestController {
 
 ```
 /**
- * Returns a list of all quiz topics that the user can choose from.
+ * Returns a list of all quiz topics that the user can choose from
  *
  * @return the list of all topics
  */
@@ -194,6 +194,6 @@ public QuestionDTO createQuestion(@RequestBody QuestionCommand questionCommand){
 ```
 
 ### Echtzeit-Kommukation mit Websockets
-Dies ist eine interaktive Zwei-Wege-Kommunikationssitzung zwischen dem Browser des Users und dem Spielserver.
-Der Client kann Nachrichten an den Websocket senden, um über die Aktivität des Clients zu informieren (z. B. Benutzer tritt dem Spiel bei,
-User beantwortet die Frage …) und eine ereignisgesteuerte Antwort erhalten, wenn ein Benutzer das Spiel aktualisiert.
+Hierbei handelt es sich um eine interaktive Zwei-Wege-Kommunikationssitzung zwischen dem Browser des Users und dem Game-Server.
+Der Client kann Nachrichten an den Websocket senden, um über die Aktivität des Clients zu informieren (z. B. User tritt dem Spiel bei,
+User beantwortet die Frage …) und eine ereignisgesteuerte Antwort erhalten, wenn ein User das Spiel aktualisiert.
