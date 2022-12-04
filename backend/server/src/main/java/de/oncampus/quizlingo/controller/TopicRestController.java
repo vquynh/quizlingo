@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
+/**
+ * REST-Controller für all topic-related requests.
+ */
 @RestController
 public class TopicRestController {
 
@@ -20,12 +23,24 @@ public class TopicRestController {
     }
 
 
+    /**
+     * Returns a list of all quiz topics that the user can choose from.
+     *
+     * @return  the list of all topics
+     */
     @GetMapping("/topics")
     public List<TopicDTO> getAllTopics(){
 
         return topicService.getAllTopics();
     }
 
+    /**
+     * Creates a new topic and returns the created topic
+     *
+     * @param  topicDTO  the topic to be created
+     * @return topicDTO  the created topic
+     * @throws TopicAlreadyExistException
+     */
     @PostMapping("/topics")
     @ResponseStatus(HttpStatus.CREATED)
     @RolesAllowed(Role.ADMIN)
