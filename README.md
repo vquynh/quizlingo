@@ -191,7 +191,7 @@ public QuestionDTO createQuestion(@RequestBody QuestionCommand questionCommand){
 
 ```
 
-### Realtime communication using Websockets 
+### Realtime communication using Websocket 
 This is a two-way interactive communication session between the user's browser and the game server.
 The client can send messages to the Websocket to inform about a  client's activity,(such as user joins the game, 
 user answers the question...) and receive event-driven response whenever a user updates the game. 
