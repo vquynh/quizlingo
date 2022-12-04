@@ -1,4 +1,4 @@
-# Patterns and Frameworks (TH Lübeck W22/23) - Gruppe Q
+# Patterns and Frameworks (TH Lübeck W22/23) — Gruppe Q
 # Projekt: quizlingo 
 [![Build and deploy to Heroku](https://github.com/vquynh/quizlingo/actions/workflows/deploy-to-heroku.yml/badge.svg)](https://github.com/vquynh/quizlingo/actions/workflows/deploy-to-heroku.yml)
 
@@ -64,7 +64,7 @@ public GameDTO getGame(@PathVariable String id){
  *
  * @param gameDTO the game to be created that belongs to a certain topic and is played by given users
  * @return GameDTO the created game
- * @throws InvalidNumberOfPlayers thrown when the number of players does not match the number of e
+ * @throws InvalidNumberOfPlayers thrown when the number of players does not match the number of actual players
  * @throws PlayerNotFoundException thrown when the user given in the GameDTO object can not be found
  */
 @PostMapping("/games")
