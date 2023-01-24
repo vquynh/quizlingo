@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * REST-Controller für all question-related requests.
+ * REST-Controller for all question-related requests.
  */
 @RestController
 public class QuestionController {
