@@ -4,15 +4,17 @@ import java.util.List;
 
 public class QuestionDTO {
 
-    public QuestionDTO(Long id, String name, String topic, Integer level, List<String> terms, List<String> options) {
+    public QuestionDTO(Long id, String questionText, String taskText, String category, String type, Integer level, List<String> terms, List<String> options, Integer correctOption) {
         this.id = id;
-        this.questionText = name;
+        this.category = category;
         this.level = level;
-        this.topic = topic;
+        this.type = type;
+        this.taskText = taskText;
+        this.questionText = questionText;
         this.terms = terms;
         this.options = options;
+        this.correctOption = correctOption;
     }
-
     private Long id;
     private String questionText;
     private String topic;
